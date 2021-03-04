@@ -1,0 +1,31 @@
+.delete {
+  &[data-loading='true'] {
+    cursor: default;
+    opacity: 0.6;
+    pointer-events: none;
+    &::before {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-right: 0.5em;
+      color: currentColor;
+      vertical-align: -10%;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      animation: rotate 1s linear infinite;
+      content: '';
+      clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 30%);
+      @keyframes rotate {
+        from {
+          transform: rotateZ(0deg);
+        }
+        to {
+          transform: rotateZ(360deg);
+        }
+      }
+    }
+  }
+}
+.ant-collapse .ant-collapse-content-box .ant-form-item .ant-form-item-label {
+  text-align: right !important;
+}
