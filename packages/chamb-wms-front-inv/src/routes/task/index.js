@@ -77,18 +77,18 @@ export default class BatchList extends Component {
     const defaultOrg =
       orgList.length === 1
         ? {
-          orgId: orgList[0].orgId,
-          orgName: orgList[0].orgName,
-          orgCode: orgList[0].orgCode,
-        }
+            orgId: orgList[0].orgId,
+            orgName: orgList[0].orgName,
+            orgCode: orgList[0].orgCode,
+          }
         : null;
     const defaultHouse =
       warehouseList.length === 1
         ? {
-          warehouseId: warehouseList[0].warehouseId,
-          warehouseName: warehouseList[0].warehouseName,
-          warehouseCode: warehouseList[0].warehouseCode,
-        }
+            warehouseId: warehouseList[0].warehouseId,
+            warehouseName: warehouseList[0].warehouseName,
+            warehouseCode: warehouseList[0].warehouseCode,
+          }
         : null;
     this.formQueryDs = new DataSet({
       ...formQueryDs(orgIds, warehouseIds, defaultOrg, defaultHouse),
@@ -269,6 +269,7 @@ export default class BatchList extends Component {
       { name: 'toLocationCode', width: 100, align: 'left' },
       { name: 'toCidCode', width: 100, align: 'left' },
       { name: 'sku', width: 100, align: 'left' },
+      { name: 'goodsName', width: 150, align: 'left' },
       { name: 'uomName', width: 100, align: 'left' },
       { name: 'batchCode', width: 140, align: 'left' },
       {
@@ -307,23 +308,29 @@ export default class BatchList extends Component {
         align: 'left',
         width: 120,
         editor: (record) => {
-          return <Lov name="attribute4" disabled={record.get('remark') === '1'} onChange={res => {
-            if (res && res.id) {
-              record.set('attribute4', res.locationCode);
-              record.set('attribute3', res.whareaCode);
-              record.set('to', {
-                toLocationCode: res.locationCode,
-                toLocationId: res.locationId,
-                toWhareaId: res.whareaId,
-                toWhareaCode: res.whareaCode,
-                toWarehouseId: res.warehouseId,
-                toWarehouseCode: res.warehouseCode,
-              });
-            } else {
-              record.set('attribute4', null);
-              record.set('attribute3', null);
-            }
-          }} />;
+          return (
+            <Lov
+              name="attribute4"
+              disabled={record.get('remark') === '1'}
+              onChange={(res) => {
+                if (res && res.id) {
+                  record.set('attribute4', res.locationCode);
+                  record.set('attribute3', res.whareaCode);
+                  record.set('to', {
+                    toLocationCode: res.locationCode,
+                    toLocationId: res.locationId,
+                    toWhareaId: res.whareaId,
+                    toWhareaCode: res.whareaCode,
+                    toWarehouseId: res.warehouseId,
+                    toWarehouseCode: res.warehouseCode,
+                  });
+                } else {
+                  record.set('attribute4', null);
+                  record.set('attribute3', null);
+                }
+              }}
+            />
+          );
         },
       },
       { name: 'attribute3', align: 'left', width: 120 },
@@ -332,7 +339,13 @@ export default class BatchList extends Component {
         align: 'left',
         width: 120,
         editor: (record) => {
-          return <NumberField name="attribute6" disabled={record.get('remark') === '1'} onBlur={() => this.check(record)} />;
+          return (
+            <NumberField
+              name="attribute6"
+              disabled={record.get('remark') === '1'}
+              onBlur={() => this.check(record)}
+            />
+          );
         },
       },
       { name: 'qtyPlan', width: 80, lock: 'right', align: 'left' },
@@ -412,7 +425,7 @@ export default class BatchList extends Component {
           />
           {activeKey === '1' ? (
             <>
-              <Button
+              {/* <Button
                 type="c7n-pro"
                 color="primary"
                 onClick={() => this.handleSend('process')}
@@ -425,7 +438,7 @@ export default class BatchList extends Component {
                 ]}
               >
                 {intl.get('winv.task.button.process').d('处理')}
-              </Button>
+              </Button> */}
               <Button
                 type="c7n-pro"
                 color="primary"
@@ -466,21 +479,21 @@ export default class BatchList extends Component {
               </Select>
             </>
           ) : (
-              <Button
-                type="c7n-pro"
-                color="primary"
-                onClick={() => this.handleSendTotal('process')}
-                permissionList={[
-                  {
-                    code: `${this.props.match.path}/process`,
-                    type: 'button',
-                    meaning: '任务管理-处理',
-                  },
-                ]}
-              >
-                {intl.get('winv.task.button.process').d('处理')}
-              </Button>
-            )}
+            <Button
+              type="c7n-pro"
+              color="primary"
+              onClick={() => this.handleSendTotal('process')}
+              permissionList={[
+                {
+                  code: `${this.props.match.path}/process`,
+                  type: 'button',
+                  meaning: '任务管理-处理',
+                },
+              ]}
+            >
+              {intl.get('winv.task.button.process').d('处理')}
+            </Button>
+          )}
         </Header>
         <Content>
           <QueryForm
@@ -519,7 +532,7 @@ export default class BatchList extends Component {
               <ShowTable
                 tableDs={this.taskTableShowDs}
                 columns={this.tableColumns}
-              // customizeTable={customizeTable}
+                // customizeTable={customizeTable}
               />
             </TabPane>
           </Tabs>

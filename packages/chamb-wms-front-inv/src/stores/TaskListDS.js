@@ -100,6 +100,11 @@ const taskTableDs = () => ({
       label: intl.get('winv.task.table.sku').d('物料编码'),
     },
     {
+      name: 'goodsName',
+      type: 'string',
+      label: intl.get('winv.task.table.goodsName').d('物料名称'),
+    },
+    {
       name: 'uomName',
       label: intl.get('winv.task.table.uomName').d('单位'),
     },
@@ -174,7 +179,7 @@ const taskTableDs = () => ({
       lovCode: 'WMDM.LOCATION',
       dynamicProps: {
         lovPara: ({ record }) => {
-          return { orgId: record.get('orgId'), warehouseId: record.get('warehouseId') }
+          return { orgId: record.get('orgId'), warehouseId: record.get('warehouseId') };
         },
       },
       label: intl.get('winv.task.table.query.attribute4').d('目标子库位'),
@@ -317,6 +322,11 @@ const taskTableShowDs = () => ({
       label: intl.get('winv.task.tableShow.sku').d('物料编码'),
     },
     {
+      name: 'goodsName',
+      type: 'string',
+      label: intl.get('winv.task.tableShow.goodsName').d('物料名称'),
+    },
+    {
       name: 'uomName',
       label: intl.get('winv.task.tableShow.uomName').d('单位'),
     },
@@ -396,7 +406,7 @@ const taskTableShowDs = () => ({
       lovCode: 'WMDM.LOCATION',
       dynamicProps: {
         lovPara: ({ record }) => {
-          return { orgId: record.get('orgId'), warehouseId: record.get('warehouseId') }
+          return { orgId: record.get('orgId'), warehouseId: record.get('warehouseId') };
         },
       },
       label: intl.get('winv.task.table.query.attribute4').d('目标子库位'),
@@ -421,31 +431,31 @@ const taskTableShowDs = () => ({
         data.forEach((item) => {
           // eslint-disable-next-line no-param-reassign
           item.qtyScan = item.qtyPlan;
-          item.fromLocationCode = item.toLocationCode
-          item.fromLocationId = item.toLocationId
-          item.fromWhareaId = item.toWhareaId
-          item.fromWhareaCode = item.toWhareaCode
-          item.fromWarehouseId = item.toWarehouseId
-          item.fromWarehouseCode = item.toWarehouseCode
-          item.toLocationCode = item.to.toLocationCode
-          item.toLocationId = item.to.toLocationId
-          item.toWhareaId = item.to.toWhareaId
-          item.toWhareaCode = item.to.toWhareaCode
-          item.toWarehouseId = item.to.toWarehouseId
-          item.toWarehouseCode = item.to.toWarehouseCode
-          item.fromOrgId = item.orgId
-          item.to = null
-          item.attribute10 = item.attribute15
-          item.attribute11 = item.detailId
-          item.attribute12 = item.billType
-          item.attribute13 = item.billTypeId
-          item.attribute14 = item.billCode
-          item.attribute15 = item.billId
-          item.attribute6 = Number(item.attribute6)
-          item.transferQty = Number(item.attribute6)
-          item.qty = Number(item.attribute6)
-          item.cidStatus = true
-          item.validQty = Number(item.attribute6)
+          item.fromLocationCode = item.toLocationCode;
+          item.fromLocationId = item.toLocationId;
+          item.fromWhareaId = item.toWhareaId;
+          item.fromWhareaCode = item.toWhareaCode;
+          item.fromWarehouseId = item.toWarehouseId;
+          item.fromWarehouseCode = item.toWarehouseCode;
+          item.toLocationCode = item.to.toLocationCode;
+          item.toLocationId = item.to.toLocationId;
+          item.toWhareaId = item.to.toWhareaId;
+          item.toWhareaCode = item.to.toWhareaCode;
+          item.toWarehouseId = item.to.toWarehouseId;
+          item.toWarehouseCode = item.to.toWarehouseCode;
+          item.fromOrgId = item.orgId;
+          item.to = null;
+          item.attribute10 = item.attribute15;
+          item.attribute11 = item.detailId;
+          item.attribute12 = item.billType;
+          item.attribute13 = item.billTypeId;
+          item.attribute14 = item.billCode;
+          item.attribute15 = item.billId;
+          item.attribute6 = Number(item.attribute6);
+          item.transferQty = Number(item.attribute6);
+          item.qty = Number(item.attribute6);
+          item.cidStatus = true;
+          item.validQty = Number(item.attribute6);
         });
       }
       const params = {
@@ -455,8 +465,8 @@ const taskTableShowDs = () => ({
         orgName: data[0].orgName,
         __id: data[0].__id,
         _status: 'create',
-        transferLinesDtoList: data
-      }
+        transferLinesDtoList: data,
+      };
       return {
         url: `${WMS_INV}/v1/${currentTenantID}/stockTrans/transferBetweenWharea`,
         method: 'PUT',
